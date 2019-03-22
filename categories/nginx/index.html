@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+
+  
+  <meta name="keywords" content="tianya,java,notes">
+  
+  
+  
+  
+  
+  
+  <title>Category: nginx | TianwYam</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="keywords" content="tianya,java,notes">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TianwYam">
+<meta property="og:url" content="https://tianwyam.github.io/categories/nginx/index.html">
+<meta property="og:site_name" content="TianwYam">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TianwYam">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+</head></html>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="TianwYam" rel="home">TianwYam</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">just do it!</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://github.com/tianwyam/blog">Fork Me On Github</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main">
+  
+    <article id="post-nginx实现前后端分离" class="post-nginx实现前后端分离 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2019-03-22-nginx实现前后端分离/">nginx实现前后端分离</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="https://tianwyam.github.io/2019-03-22-nginx实现前后端分离/" data-id="cjtjsjmjs0002l0uoqt69w94k" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h2 id="nginx实现前后端分离"><a href="#nginx实现前后端分离" class="headerlink" title="nginx实现前后端分离"></a>nginx实现前后端分离</h2><h3 id="1、安装nginx"><a href="#1、安装nginx" class="headerlink" title="1、安装nginx"></a>1、安装nginx</h3><p><a href="https://blog.csdn.net/mybook201314/article/details/73604640" target="_blank" rel="noopener">参考 https://blog.csdn.net/mybook201314/article/details/73604640</a></p>
+<h3 id="2、配置conf"><a href="#2、配置conf" class="headerlink" title="2、配置conf"></a>2、配置conf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">路径：nginx/conf/nginx.conf</span><br></pre></td></tr></table></figure>
+<h4 id="2-1、设置前端代码位置"><a href="#2-1、设置前端代码位置" class="headerlink" title="2.1、设置前端代码位置"></a>2.1、设置前端代码位置</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line"><span class="meta">	#</span><span class="bash"> root写前端代码位置 Linux 如：/home/frontend/xxx</span></span><br><span class="line">	root   E:\\desktop\\HTML;</span><br><span class="line">	index  index.html index.htm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-2、配置后台请求拦截"><a href="#2-2、配置后台请求拦截" class="headerlink" title="2.2、配置后台请求拦截"></a>2.2、配置后台请求拦截</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">后台跳转</span></span><br><span class="line"><span class="meta">#</span><span class="bash">拦截所有前端 以 /api 开始的请求</span></span><br><span class="line"><span class="meta">#</span><span class="bash">转发到 后端服务 http://localhost:8080/backend_project_name/api/......</span></span><br><span class="line">location ~ ^/api &#123;</span><br><span class="line"></span><br><span class="line">	proxy_set_header Host $host;</span><br><span class="line">	proxy_set_header X-Real-Ip $remote_addr;</span><br><span class="line">	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">	proxy_set_header X-Forworded-For $http_x_forwarded_for;</span><br><span class="line">	</span><br><span class="line"><span class="meta">	#</span><span class="bash"> 存 cookie</span></span><br><span class="line">	proxy_cookie_path //backend_project_name/ / ;</span><br><span class="line">	</span><br><span class="line"><span class="meta">	#</span><span class="bash"> 重写 后台请求项目名称</span></span><br><span class="line"><span class="meta">	#</span><span class="bash"> 若后台项目名称为/，或者没有，则此不用配置</span></span><br><span class="line">	rewrite /(.+)$ /backend_project_name/$1 break;</span><br><span class="line">	</span><br><span class="line"><span class="meta">	#</span><span class="bash"> 后台服务路径</span></span><br><span class="line">	proxy_pass   http://localhost:8080;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-3、完整配置"><a href="#2-3、完整配置" class="headerlink" title="2.3、完整配置"></a>2.3、完整配置</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">定义Nginx运行的用户和用户组</span></span><br><span class="line"><span class="meta">#</span><span class="bash">user  nobody;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">nginx进程数，建议设置为等于CPU总核心数</span></span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">error_log  logs/error.log;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">error_log  logs/error.log  notice;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">error_log  logs/error.log  info;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">进程文件</span></span><br><span class="line"><span class="meta">#</span><span class="bash">pid        logs/nginx.pid;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">http服务器</span></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line"></span><br><span class="line">    #keepalive_timeout  0;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    #gzip  on;</span><br><span class="line"></span><br><span class="line"><span class="meta">	#</span><span class="bash"><span class="comment"># 自定义服务 可以定义多个，监听不同端口</span></span></span><br><span class="line">    server &#123;</span><br><span class="line">	</span><br><span class="line">		// nginx服务监听端口</span><br><span class="line">        listen       80;</span><br><span class="line">		</span><br><span class="line">		// nginx服务名称</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        #charset koi8-r;</span><br><span class="line"></span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">		// 前端位置配置</span><br><span class="line">        location / &#123;</span><br><span class="line"><span class="meta">			#</span><span class="bash"> root写前端代码位置 Linux 如：/home/frontend/xxx</span></span><br><span class="line">            root   E:\\desktop\\HTML;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        #配置500 </span><br><span class="line">        error_page   500 502 503 504  /50x.html;</span><br><span class="line">        location = /50x.html &#123;</span><br><span class="line">            root   html;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">		#</span><span class="bash">后台跳转</span></span><br><span class="line"><span class="meta">		#</span><span class="bash">拦截所有前端 以 /api 开始的请求</span></span><br><span class="line"><span class="meta">		#</span><span class="bash">转发到 后端服务 http://localhost:8080/backend_project_name/api/......</span></span><br><span class="line">        location ~ ^/api &#123;</span><br><span class="line">		</span><br><span class="line">			proxy_set_header Host $host;</span><br><span class="line">			proxy_set_header X-Real-Ip $remote_addr;</span><br><span class="line">			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">			proxy_set_header X-Forworded-For $http_x_forwarded_for;</span><br><span class="line">			</span><br><span class="line"><span class="meta">			#</span><span class="bash"> 设置 cookie</span></span><br><span class="line">			proxy_cookie_path //backend_project_name/ / ;</span><br><span class="line">			</span><br><span class="line"><span class="meta">			#</span><span class="bash"> 重写 后台请求项目名称</span></span><br><span class="line"><span class="meta">			#</span><span class="bash"> 若后台项目名称为/，或者没有，则此不用配置</span></span><br><span class="line">			rewrite /(.+)$ /backend_project_name/$1 break;</span><br><span class="line"></span><br><span class="line"><span class="meta">			#</span><span class="bash"> 后台服务路径</span></span><br><span class="line">            proxy_pass   http://localhost:8080;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019-03-22-nginx实现前后端分离/">
+    <time datetime="2019-03-22T07:33:24.000Z" class="entry-date">
+        2019-03-22
+    </time>
+</a>
+    
+  <span class="article-delim">&#8226;</span>
+  <div class="article-category">
+  <a class="article-category-link" href="/categories/nginx/">nginx</a>
+  </div>
+
+    
+  <span class="article-delim">&#8226;</span>
+  <div>
+  	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前后端分离/">前后端分离</a></li></ul>
+  </div>
+  
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+  
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+<aside class="widget">
+	<h3 class="widget-title">关于我</h3>
+	
+	<div class="widget-content">
+		
+		<p>邮箱：tianya.mw@qq.com</p>
+		<p>QQ：1129064096</p>
+		<div class="github-card user-card">
+			<div class="header User"></div>
+			<a class="avatar" href="https://github.com/tianwyam" target="_top">
+				<img src="https://avatar.gitee.com/uploads/51/1088151_tianyagongmingyue.png!avatar100?1477980572" alt="tianya" style="border-radius:50%;opacity: 0.8;">
+			</a>
+		</div>
+	</div>
+	
+	<div class="widget-content">
+		<h1>tianwyam</h1>
+	</div>
+	
+</aside>
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Music</h3>
+    <div class="widget-content">
+    	张靓颖【我的梦】
+      <video autoplay="autoplay" name="media" loop="loop">
+      	<source src="http://www.ytmp3.cn/down/57682.mp3" type="audio/mpeg">
+      </video>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget-content">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2019-03-22-nginx实现前后端分离/">nginx实现前后端分离</a>
+          </li>
+        
+          <li>
+            <a href="/2019-03-22-H2内嵌数据库/">H2内嵌数据库的使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-content">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/java/">java</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H2/">H2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内嵌数据库/">内嵌数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前后端分离/">前后端分离</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/H2/" style="font-size: 10px;">H2</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/内嵌数据库/" style="font-size: 10px;">内嵌数据库</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a>
+    </div>
+  </aside>
+
+  
+    
+<aside class="widget">
+	<h3 class="widget-title">友情链接</h3>
+	
+	<div class="widget-content">
+		<p><a href="https://me.csdn.net/mybook201314">CSDN</a></p>
+		<p><a href="https://gitee.com/tianyagongmingyue">gitee</a></p>
+	</div>
+	
+</aside>
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2019 tianwyam
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
