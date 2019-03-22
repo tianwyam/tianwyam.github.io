@@ -809,8 +809,31 @@ footer[role="contentinfo"] a:hover {
     content: "\f02b";
 }*/
 .article-tag-list-link:before {
-    content: "#";
+    content: "@";
 }
+
+.article-tag-list-link {
+    display: inline-block;
+    border: 1px solid rgba(171, 154, 154, 0.8);
+    border-radius: 999em;
+    padding: 0 10px;
+    color: #fff;
+    line-height: 24px;
+    font-size: 12px;
+    text-decoration: none;
+    margin: 6px 1px;
+    margin-bottom: 0px;
+}
+
+.article-category-link{
+	/*border: 1px solid rgba(171, 154, 154, 0.8);
+	text-decoration: none;
+  margin: 0 1px;
+  margin-bottom: 6px;*/
+ 	margin: 6px;
+}
+
+
 .article-delim {
     margin-left: 5px;
     margin-right: 5px;
